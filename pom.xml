@@ -28,6 +28,19 @@
     </dependency>
   </dependencies>
 
+   <distributionManagement>
+        <repository>
+                <id>releaseRepo</id>
+                <name>releaseRepo</name>
+                <url>http://100.24.236.97:8081/repository/releaseRepo/</url>
+        </repository>
+        <snapshotRepository>
+                <id>snapshotRepo</id>
+                <name>snapshotRepo</name>
+                <url>http://100.24.236.97:8081/repository/snapshotRepo/</url>
+        </snapshotRepository>
+</distributionManagement>
+
   <build>
     <finalName>sample-webapp</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
