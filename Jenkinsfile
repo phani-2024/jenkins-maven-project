@@ -18,7 +18,7 @@ pipeline {
       	}
         stage('Git checkout') {
             steps {
-             git 'https://github.com/saiurakrishna/maven-webapp.git'
+             git credentialsId: 'github-credentails', url: 'https://github.com/saiurakrishna/jenkins-maven-project.git'
             }
         }
 	    stage('printing env variables') {
