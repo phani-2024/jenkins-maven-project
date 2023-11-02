@@ -1,6 +1,6 @@
 pipeline {
     agent {
-      label 'my-label'
+      label 'ubuntu-slave'
     }
 	environment {
         VERSION = '1.2.0'
