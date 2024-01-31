@@ -1,56 +1,61 @@
-pipeline {
-    agent any
-      
-	environment {
+pipeline { 
+
+agent {
+    label 'aws-ami'
+}
+parameters {
+        // Define parameters here
+        string(name: 'ENVIRONMENT', defaultValue: 'dev', description: 'Target environment')
+        choice(name: 'BRANCH', choices: ['master', 'dev'], description: 'Branch to build')
+    }
+environment {
         VERSION = '1.2.0'
         X = '10'
 	}
-	tools {
-	git 'Default'
-	maven 'maven'
-	}
-    stages {
-	     stage('clean WS') {
+tools {
+	    
+	    maven 'maven'
+}
+
+stages {
+
+  stage('git checkout') {
+    steps {
+        script {
+                    // Tool configuration only for the git checkout stage
+                    def gitTool = tool 'git'
+      git credentialsId: 'Gihub-login', url: 'https://github.com/saikrishna21297/maven-webapp-project-1.git'
+    }
+  }
+  }
+  stage('using envs') {
+      steps {
+          echo "the version is ${VERSION}"
+          echo "The Value of X is ${X}"
+      }
+  }
+  stage('validate') {
+    steps {
+      sh 'mvn validate'
+    }
+  }
+  stage('compile') {
+  steps {
+   sh 'mvn compile'
+  }
+  }
+  stage('package') {
+    steps {
+      sh 'mvn package'
+    }
+  }
+  stage('clean WS') {
 	      	steps {
 			      cleanWs()
 		       }
       	}
-        stage('Git checkout') {
-            steps {
-             git credentialsId: 'Gihub-login', url: 'https://github.com/saiurakrishna/jenkins-maven-project.git'
-            }
-        }
-	    stage('printing env variables') {
-		    steps {
-			    echo "This is my app ${VERSION}"
-			    echo "The value of x is ${X}"
-		    }
-	    }
-        stage('validate') {
-            steps {
-               sh 'mvn validate'    
-               
-            }
-        }
-        stage('compile') {
-            steps {
-                 
-                sh 'mvn compile'
-            }
-        }
-	 stage('test') {
-            steps {
-                  
-                sh 'mvn test'
-            }
-        }
-	 stage('package') {
-            steps {
-                  
-                sh 'mvn package'
-            }
-        }
-
-
-    }
+ 
+  
+}
+ 
 }
