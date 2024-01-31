@@ -3,11 +3,7 @@ pipeline {
 agent {
     label 'aws-ami'
 }
-parameters {
-        // Define parameters here
-        string(name: 'ENVIRONMENT', defaultValue: 'dev', description: 'Target environment')
-        choice(name: 'BRANCH', choices: ['master', 'dev'], description: 'Branch to build')
-    }
+
 environment {
         VERSION = '1.2.0'
         X = '10'
