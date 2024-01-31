@@ -1,7 +1,6 @@
 pipeline {
-    agent {
-      label 'ubuntu-slave'
-    }
+    agent any
+      
 	environment {
         VERSION = '1.2.0'
         X = '10'
@@ -18,7 +17,7 @@ pipeline {
       	}
         stage('Git checkout') {
             steps {
-             git credentialsId: 'github-credentails', url: 'https://github.com/saiurakrishna/jenkins-maven-project.git'
+             git credentialsId: 'Gihub-login', url: 'https://github.com/saiurakrishna/jenkins-maven-project.git'
             }
         }
 	    stage('printing env variables') {
