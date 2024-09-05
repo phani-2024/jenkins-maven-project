@@ -1,8 +1,6 @@
 pipeline { 
 
-agent {
-    label 'worker_1'
-}
+agent NONE
 
 environment {
         VERSION = '1.2.0'
