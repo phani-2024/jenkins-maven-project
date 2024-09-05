@@ -1,7 +1,7 @@
 pipeline { 
 
 agent {
-    label 'aws-ami'
+    label 'worker_1'
 }
 
 environment {
